@@ -39,7 +39,7 @@ width: 800px;
            {<Header/>}  
             
             <Container>     
-            {articlelist.map((article)=>(       //map이 왜 안될까..
+            {articlelist.map((article)=>(       //map이 왜 안될까...
                    < Card
                     key={article.id}
                     id={article.id}
