@@ -4,15 +4,18 @@ import styled from "styled-components";
 import Card from "../components/Card";
 import Header from "../components/Header/Header";  
 
+
 const Container = styled.div`
 display: grid;
 grid-template-columns: 1fr 1fr 1fr;
+width: 800px;
 `;
-
     
     const Home = () => {
+        
        
        const [articlelist, setArticleList] = useState([]);
+       
 
        useEffect(()=> {
         axios
@@ -23,12 +26,13 @@ grid-template-columns: 1fr 1fr 1fr;
         })
         .catch((e) => {
             console.error(e);
+            
         });
-    }, []);
+    }, []); 
 
-
-    /*if (!Array.isArray(articlelist)) {
-        return <div>Loading...</div>;
+    
+   /* if (!Array.isArray(articlelist)) {
+        return <div>No data available</div>;
     }*/
     return (
         <> 

@@ -4,7 +4,8 @@ import axios from "axios";
 
 
 const Header = () => {
- const Container = styled.div`    
+ const Container = styled.div` 
+ text-align   : center ;
     `
 
 const Text1 = styled.h1`
@@ -43,7 +44,7 @@ return(
     <p>멋쟁이사자처럼 12기 여러분 화이팅!! 어른사자로 폭풍성장중</p>
         </Text2>
         <Text3>
-            게시물 {image}개
+           <p> 게시물 {image}개</p>
         </Text3>
     </Container>
     
