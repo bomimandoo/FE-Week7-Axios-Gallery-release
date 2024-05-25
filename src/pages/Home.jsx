@@ -16,6 +16,7 @@ width: 800px;
        
        const [articlelist, setArticleList] = useState([]);
        
+       
 
        useEffect(()=> {
         axios
@@ -31,9 +32,9 @@ width: 800px;
     }, []); 
 
     
-   /* if (!Array.isArray(articlelist)) {
+  if (!Array.isArray(articlelist)) {
         return <div>No data available</div>;
-    }*/
+    }
     return (
         <> 
            {<Header/>}  
@@ -58,4 +59,5 @@ width: 800px;
 };
 
 export default Home;
+
  

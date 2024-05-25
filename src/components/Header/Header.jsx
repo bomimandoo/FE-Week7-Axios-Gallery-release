@@ -44,7 +44,7 @@ return(
     <p>멋쟁이사자처럼 12기 여러분 화이팅!! 어른사자로 폭풍성장중</p>
         </Text2>
         <Text3>
-           <p> 게시물 {image}개</p>
+           게시물 {image}개
         </Text3>
     </Container>
     
