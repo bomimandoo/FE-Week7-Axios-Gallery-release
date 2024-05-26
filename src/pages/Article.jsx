@@ -1,70 +1,94 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
 import axios from "axios";
 import styled from "styled-components";
+import { useParams, useNavigate } from "react-router-dom";
 
-const Container = styled.div`
+const ArticleContainer = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center; /* 중앙 정렬 */
+  justify-content: center; /* 수직 중앙 정렬 */
+  padding: 10px;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 800px; /* 최대 너비 설정 */
   padding: 20px;
-  margin-right: 320px;
+  background-color: #fff;
+  text-align: left;
 `;
 
-/*const Image = styled.img`
-  max-width: 100%;
-  height: auto;
-`;*/
+const TextHeader = styled.h1`
+  margin-bottom: 20px;
+`;
 
-const Text1 = styled.h1``;
+const TextWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 20px;
+`;
+
 const Text2 = styled.p`
-position: relative;
-top: -20px;
-`
-
+  margin-left: 100px;
+`;
 
 const Text3 = styled.p`
-position: relative;
-left: 800px;
-bottom: 110px;
-font-weight: 500;
-font-size: 15px;
-`
+  margin-right: 90px;
+  font-weight: 500;
+  font-size: 15px;
+`;
+
+const ArticleImage = styled.img`
+  width: 100%;
+  max-width: 600px; /* 이미지 최대 너비 설정 */
+  margin: 0 auto;
+`;
 
 const Article = () => {
   const { articleId } = useParams();
-
-  const [commentCount] = useState(0);
-  const [articleList, setArticleList] = useState({
-    id: 0,
-    imageURL: "",
-    imageName: "",
-    imageText: "",
-  });
+  const [article, setArticle] = useState(null);
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    axios
-      .get(`http://3.36.127.43:8080/${articleId}`) 
-      .then((res) => {
-        setArticleList(res.data);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  }, []);
+    const goArticle = async () => {
+      try {
+        const res = await axios.get("http://3.36.127.43:8080/imageAll");
+        const articleIdNum = articleId.replace(/\D/g, ""); // 숫자만 추출
+        const articleIdStr = `image${articleIdNum}`;
+        const articleData = res.data.find(
+          (article) => article.id === articleIdStr
+        );
+        if (articleData) {
+          setArticle(articleData);
+        } else {
+          navigate("./NotFound");
+        }
+      } catch (err) {
+        setError("데이터를 불러오는 중 오류가 발생했습니다.");
+        navigate("./NotFound");
+      }
+    };
+    goArticle();
+  }, [articleId, navigate]);
 
   return (
-    <>
-    <Container>
-        <Text1>멋쟁이 사자처럼 at 인하대학교 12기 모집</Text1>
-        <Text2>1년간 즐겁게 활동할 아기사자들을 모집합니다!</Text2>
-        <Text3>댓글 {commentCount}개</Text3>
-     
-      <img src={articleList.imageURL} alt={articleList.imageName} 
-      />
-      {/* 유의미한 텍스트를 포함한 alt 속성 추가 */}
-      </Container>
-      </>
+    <ArticleContainer>
+      {article ? (
+        <>
+          <TextHeader>{article.imageName}</TextHeader>
+          <TextWrapper>
+            <Text2>{article.imageText}</Text2>
+            <Text3>댓글 {}개</Text3>
+          </TextWrapper>
+          <ArticleImage src={article.imageURL} alt={article.imageName} />
+        </>
+      ) : (
+        <></>
+      )}
+      {error && <p>{error}</p>}
+    </ArticleContainer>
   );
 };
 
-export default Article; 
+export default Article;

@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import lion from "../assets/lion.png";
-import { Link } from "react-router-dom";
+
 
 const Container = styled.div`
   padding: 100px;
@@ -49,7 +49,7 @@ const NotFound = () => {
 
         <Text2>어흥...</Text2>
 
-        <Button>뒤돌아서 도망가기!</Button>
+        <Button onClick={() => navigate("/")}>뒤돌아서 도망가기!</Button>
       </Container>
     </>
   );
