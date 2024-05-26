@@ -2,62 +2,56 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import Card from "../components/Card";
-import Header from "../components/Header/Header";  
-
+import Header from "../components/Header/Header";
 
 const Container = styled.div`
-display: grid;
-grid-template-columns: 1fr 1fr 1fr;
-width: 800px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  width: 800px;
+  gap: 5px;
+  margin-left: 500px;
+  padding-top: 20px;
+  
 `;
-    
-    const Home = () => {
-        
-       
-       const [articlelist, setArticleList] = useState([]);
-       
-       
 
-       useEffect(()=> {
-        axios
-        .get(`http://3.36.127.43:8080/imageAll`)  //전체 이미지 가져오기
-        .then((res) => {
-            setArticleList(res.data.data);
-            console.log(res.data.data);
-        })
-        .catch((e) => {
-            console.error(e);
-            
-        });
-    }, []); 
+const Home = () => {
+  const [articlelist, setArticleList] = useState([]);
 
-    
+  useEffect(() => {
+    axios
+      .get(`http://3.36.127.43:8080/imageAll`)
+      .then((res) => {
+        setArticleList(res.data); // .data
+        console.log(res.data);
+      })
+      .catch((e) => {
+        console.error(e);
+      });
+  }, []);
+
   if (!Array.isArray(articlelist)) {
-        return <div>No data available</div>;
-    }
-    return (
-        <> 
-           {<Header/>}  
-            
-            <Container>     
-            {articlelist.map((article)=>(       //map이 왜 안될까...
-                   < Card
-                    key={article.id}
-                    id={article.id}
-                    img={article.imageURL}
-                    title={article.imageName}
-                    txt={article.imageText}
-                    />
-                )
-                )}
-            </Container>
-            
-           
-            
-        </>
-    );
+    return <div>No data available</div>;
+  }
+
+  return (
+    <>
+      <Header />
+
+      <Container>
+        {articlelist.map((article) => (
+          <Card
+            key={article.id}
+            id={article.id}
+            img={article.imageURL}
+            title={article.imageName}
+            txt={article.imageText}
+          />
+        ))}
+      </Container>
+
+      
+    </>
+  );
 };
 
 export default Home;
-
- 
