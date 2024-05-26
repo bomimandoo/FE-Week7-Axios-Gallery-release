@@ -8,7 +8,7 @@ const Container = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 10px;
-  width: 40%;
+  width: 50%;
   padding: 20px;
 `;
 

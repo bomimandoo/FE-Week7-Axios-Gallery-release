@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import Article from "./pages/Article";
 import Layout from "./pages/Layout";
 import NotFound from "./pages/NotFound";
+
 import "./App.css";
 
 function App() {

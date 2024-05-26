@@ -13,21 +13,27 @@ const Wrapper = styled.div`
   padding: 6px;
   display: flex;
   flex-direction: column;
-  align-items: center;
   overflow: hidden;
   cursor: pointer;
 `;
 
 const Name = styled.p`
-  font-size: 16px;
+  font-size: 20px;
   font-weight: bold;
   margin-top: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  
 `;
 
 const Text = styled.p`
   font-size: 14px;
   color: gray;
   margin-top: 5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 const Card = ({ id, img, title, txt }) => {
