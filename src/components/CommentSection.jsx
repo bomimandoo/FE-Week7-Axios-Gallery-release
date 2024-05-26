@@ -2,8 +2,8 @@ import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import styled from "styled-components";
 
-// 스타일 컴포넌트 정의
-const CommentContainer = styled.div`
+
+const CommentContainer = styled.div` //댓글창과 리스트 컨테이너
   margin-top: 20px;
   width: 100%;
   max-width: 600px;
@@ -22,12 +22,12 @@ const CommentItem = styled.li`
   align-items: center;
 `;
 
-const CommentText = styled.div`
+const CommentText = styled.div` 
   display: flex;
   align-items: center;
 `;
 
-const CommentAuthor = styled.span`
+const CommentAuthor = styled.span` //익명
   font-weight: bold;
   margin-right: 20px; 
 `;
@@ -38,7 +38,7 @@ const CommentForm = styled.form` //댓글창
   margin-bottom: 20px; 
 `;
 
-const CommentInput = styled.input`
+const CommentInput = styled.input`  //댓글 작성란-input 태그와 placeholder 사용
   padding: 10px;
   font-size: 14px;
   width: 100%;
@@ -47,7 +47,7 @@ const CommentInput = styled.input`
   box-sizing: border-box; 
 `;
 
-const CommentButton = styled.button`
+const CommentButton = styled.button` //게시 버튼
   margin-left: 10px; 
   padding: 5px 10px;
   font-size: 14px;
@@ -59,7 +59,7 @@ const CommentButton = styled.button`
   box-sizing: border-box; 
 `;
 
-const DeleteButton = styled.button`
+const DeleteButton = styled.button` //삭제 버튼
   color: gray;
   background-color: white;
   border: none;
@@ -67,13 +67,13 @@ const DeleteButton = styled.button`
   padding: 5px 10px;
 `;
 
-const CommentSection = ({ imgId, setCommentCount }) => {
+const CommentSection = ({ imgId, setCommentCount }) => {   //댓글 리스트
   const [comments, setComments] = useState([]);
   const [comment, setComment] = useState("");
   const [error, setError] = useState(null);
 
   // 댓글 리스트 불러오기 함수
-  const fetchComments = useCallback(async () => {
+  const fetchComments = useCallback(async () => {     //비동기화-중간에 추가해도 바로 변동되도록!
     try {
       const res = await axios.get(`http://3.36.127.43:8080/${imgId}/comments`);
       setComments(res.data);
@@ -108,12 +108,12 @@ const CommentSection = ({ imgId, setCommentCount }) => {
     }
   };
 
-  // 컴포넌트가 마운트될 때 댓글 리스트 불러오기
+ 
   useEffect(() => {
     fetchComments();
   }, [imgId, fetchComments]); 
 
-  // 댓글 작성 핸들러
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (comment.trim()) {

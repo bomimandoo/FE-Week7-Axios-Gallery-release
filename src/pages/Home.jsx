@@ -4,10 +4,10 @@ import styled from "styled-components";
 import Card from "../components/Card";
 import Header from "../components/Header/Header";
 
-const Container = styled.div`
+const Container = styled.div` //전체 카드 컨테이너
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
+  gap: 10px;  //칸 사이 간격 조정
   width: 50%;
   padding: 20px;
 `;
@@ -17,7 +17,7 @@ const Home = () => {
 
   useEffect(() => {
     axios
-      .get(`http://3.36.127.43:8080/imageAll`)
+      .get(`http://3.36.127.43:8080/imageAll`)  //전체 이미지 띄우기
       .then((res) => {
         if (Array.isArray(res.data)) {
           setArticleList(res.data);
@@ -30,7 +30,7 @@ const Home = () => {
       });
   }, []);
 
-  if (!Array.isArray(articlelist)) {
+  if (!Array.isArray(articlelist)) {      // map이 잘 안돌아갔을 시 띄워지는 문구?
     return <div>No data</div>;
   }
 

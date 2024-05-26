@@ -13,7 +13,7 @@ const Text1 = styled.p`
   font-size: 14px;
 `;
 
-const Image = styled.img`
+const Image = styled.img`  //사자 이미지
   width: 100%;
   height: 600px;
 `;
@@ -49,7 +49,8 @@ const NotFound = () => {
 
         <Text2>어흥...</Text2>
 
-        <Button onClick={() => navigate("/")}>뒤돌아서 도망가기!</Button>
+        <Button onClick={() => navigate("/")}>뒤돌아서 도망가기!</Button>  
+        {/*navigate 이용하여 클릭 시 홈으로 가게끔 */}
       </Container>
     </>
   );

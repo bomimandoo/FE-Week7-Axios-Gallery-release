@@ -23,3 +23,5 @@ function App() {
 
 export default App;
 
+//URL 파라미터는 경로에 /setting/:userId/ 와 같이 : 을 사용하여 설정(중첩 사용)
+

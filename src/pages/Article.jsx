@@ -4,7 +4,6 @@ import styled from "styled-components";
 import { useParams, useNavigate } from "react-router-dom";
 import CommentSection from "../components/CommentSection"; // 댓글 컴포넌트 불러오기
 
-// 스타일드 컴포넌트 정의
 const ArticleContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -23,6 +22,7 @@ const TextHeader = styled.h1`
 `;
 
 const TextWrapper = styled.div`
+  //Text2와 Text3의 위치를 같게 하기 위해 묶음
   display: flex;
   justify-content: space-between;
   width: 100%;
@@ -39,19 +39,20 @@ const Text3 = styled.p`
   font-size: 15px;
 `;
 
+//
 const ArticleImage = styled.img`
   width: 100%;
   max-width: 600px;
   margin: 0 auto;
 `;
 
-// Article 컴포넌트
+// 
 const Article = () => {
-  const { articleId } = useParams(); // URL 매개변수 가져오기
-  const [article, setArticle] = useState(null); // 기사 상태 관리
-  const [error, setError] = useState(null); // 오류 상태 관리
+  const { articleId } = useParams(); //해당 userId들을 묶어 가져옴
+  const [article, setArticle] = useState(null); 
+  const [error, setError] = useState(null); 
   const [commentCount, setCommentCount] = useState(0); // 댓글 개수 상태 관리
-  const navigate = useNavigate(); // 네비게이션 훅
+  const navigate = useNavigate(); 
 
   // articleId가 변경될 때마다 기사 데이터를 가져옴
   useEffect(() => {
@@ -64,8 +65,10 @@ const Article = () => {
           (article) => article.id === articleIdStr
         );
         if (articleData) {
-          setArticle(articleData); // 기사 데이터 설정
-          const commentRes = await axios.get(`http://3.36.127.43:8080/${articleIdStr}/comments`);
+          setArticle(articleData); 
+          const commentRes = await axios.get(
+            `http://3.36.127.43:8080/${articleIdStr}/comments`
+          );
           setCommentCount(commentRes.data.length);
         } else {
           navigate("/NotFound"); // 데이터가 없을 경우 NotFound 페이지로 이동
@@ -76,20 +79,25 @@ const Article = () => {
       }
     };
     goArticle();
-  }, [articleId, navigate]); // navigate를 의존성 배열에 추가
+  }, [articleId, navigate]); 
 
   return (
     <ArticleContainer>
       {error && <p>{error}</p>} {/* 오류 메시지 표시 */}
       {article ? (
-        <>
-          <TextHeader>{article.imageName}</TextHeader>
+        <>   {/*해당 이미지에 맞는 텍스트 불러오기*/}
+          <TextHeader>{article.imageName}</TextHeader> 
           <TextWrapper>
             <Text2>{article.imageText}</Text2>
-            <Text3>댓글 {commentCount}개</Text3> {/* 댓글 개수 표시 */}
+            <Text3>댓글 {commentCount}개</Text3> {/* 댓글 개수 변동될 때마다 불러오기 */}
           </TextWrapper>
           <ArticleImage src={article.imageURL} alt={article.imageName} />
-          {article && <CommentSection imgId={article.id} setCommentCount={setCommentCount} />} 
+          {article && (
+            <CommentSection
+              imgId={article.id}
+              setCommentCount={setCommentCount}
+            />
+          )}
         </>
       ) : (
         !error && <p>기사를 불러오는 중입니다...</p>
