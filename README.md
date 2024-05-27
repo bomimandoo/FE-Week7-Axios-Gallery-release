@@ -9,6 +9,7 @@ https://github.com/bomimandoo/FE-Week7-Axios-Gallery-release/assets/163390823/c0
 
 
 
+
 저의 이해력 부족 이슈로 많이 막막하더라고요...
 
 무엇을 질문해야할지도 잘 모르겠는 그런ㅜㅜ
@@ -23,6 +24,7 @@ https://github.com/bomimandoo/FE-Week7-Axios-Gallery-release/assets/163390823/c0
 
 일차적으로 주석으로 표시하며 복습을 했고,
 아래 부분은 복습 시 참고하기 위해 더 이해가 필요한 부분을 적었습니다!
+
 
 -하위 페이지로 넘어가지 않았던 문제 해결 방법/
 
